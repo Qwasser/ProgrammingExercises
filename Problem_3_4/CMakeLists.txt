@@ -1,19 +1,21 @@
 cmake_minimum_required(VERSION 2.8.12)
 
-set(PROJECT_NAME_STR SimpleDataStructures)
+set(PROJECT_NAME_STR Problem_3_4)
 project(${PROJECT_NAME_STR})
+
 
 # Module 
 
 set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/include)
-set(${PROJECT_NAME_STR}_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/${PROJECT_NAME_STR}/include PARENT_SCOPE)
 
-include_directories(${COMMON_INCLUDES} CACHE INTERNAL "${PROJECT_NAME}: Include Directories" FORCE)
+include_directories(${COMMON_INCLUDES} ${SimpleDataStructures_INCLUDE_DIRS})
 
 file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
-file(GLOB HEADER_FILES ${PROJECT_SOURCE_DIR}/include/*/*.h)
+file(GLOB HEADER_FILES ${PROJECT_SOURCE_DIR}/include/*.h)
 
-add_library(${PROJECT_NAME_STR} SHARED ${SRC_FILES} ${HEADER_FILES})
+add_executable(${PROJECT_NAME_STR} ${SRC_FILES})
+add_dependencies(${PROJECT_NAME_STR} SimpleDataStructures)
+target_link_libraries(${PROJECT_NAME_STR} SimpleDataStructures)
 
 # Testing 
 enable_testing()

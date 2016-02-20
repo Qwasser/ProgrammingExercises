@@ -8,3 +8,4 @@ enable_testing()
 
 add_subdirectory(ext/gtest)
 add_subdirectory(SimpleDataStructures)
+add_subdirectory(Problem_3_4)

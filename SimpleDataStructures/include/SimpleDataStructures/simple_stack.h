@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <vector>
 
 #include "list_node.h"
 
@@ -7,6 +8,8 @@ public:
     T pop();
     void push(T object);
     T peek();
+
+    std::vector<T> toVector();
 
     bool isEmpty() {
         return current_size == 0;
@@ -52,4 +55,16 @@ template <class T> T SimpleStack<T>::peek() {
     else {
         throw std::out_of_range("Peek on empty stack");
     }
+}
+
+template <class T> std::vector<T> SimpleStack<T>::toVector() {
+    std::vector<T> result;
+    result.reserve(current_size);
+
+    ListNode<T> * node = top;
+    while(node) {
+        result.push_back(node->data);
+        node = node->next;
+    }
+    return result;
 }

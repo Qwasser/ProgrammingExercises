@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include <simple_stack.h>
+#include <SimpleDataStructures/simple_stack.h>
 
 
 TEST(simple_stack_test, empty_stack_exceptions)
