@@ -25,18 +25,22 @@ private:
 };
 
 template <class T> T SimpleStack<T>::pop() {
-    if (top) {
-        T item = top->data;
+    if (!top) {
+        throw std::out_of_range("Pop on empty stack");
+    }
 
-        ListNode<T> * old_top = top;
-        top = top->next;
+    ListNode<T> * old_top = top;
+    top = top->next;
+    current_size--;
+
+    try {
+        T item = old_top->data;
         delete old_top;
-        current_size--;
-
         return item;
     }
-    else {
-        throw std::out_of_range("Pop on empty stack");
+    catch (...) {
+        delete old_top;
+        throw;
     }
 }
 
