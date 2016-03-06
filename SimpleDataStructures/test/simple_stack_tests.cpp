@@ -1,3 +1,6 @@
+#include <stdexcept>
+#include <iostream>
+
 #include "gtest/gtest.h"
 
 #include <SimpleDataStructures/simple_stack.h>
@@ -57,6 +60,38 @@ TEST(simple_stack_test, stack_peek)
     ASSERT_FALSE(stack.isEmpty());
     ASSERT_EQ(1, stack.size());
     ASSERT_EQ(test_item, peek_item);
+}
+
+class MockWithCopyException {
+public:
+
+   MockWithCopyException() {}
+
+    MockWithCopyException (const MockWithCopyException & other) {
+        throw std::logic_error("Copied secind time!");
+    }
+};
+
+TEST(simple_stack_test, pop_exception_safety)
+{
+    SimpleStack<MockWithCopyException> stack;
+
+    stack.push(MockWithCopyException());
+    ASSERT_EQ(1, stack.size());
+
+    try {
+        stack.pop();
+        FAIL() << "Expected std::logical_error";
+    }
+    catch(std::logic_error const & err) {
+
+    }
+    catch(...) {
+        FAIL() << "Expected std::logical_error";
+    }
+
+    ASSERT_EQ(0, stack.size());
+
 }
 
 int main(int argc, char **argv) {
