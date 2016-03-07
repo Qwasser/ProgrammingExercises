@@ -1,3 +1,6 @@
+#ifndef SIMPLEDATASTRUCTURES_SIMPLE_STACK_H_
+#define SIMPLEDATASTRUCTURES_SIMPLE_STACK_H_
+
 #include <stdexcept>
 #include <vector>
 
@@ -72,3 +75,5 @@ template <class T> std::vector<T> SimpleStack<T>::toVector() {
     }
     return result;
 }
+
+#endif  // SIMPLEDATASTRUCTURES_SIMPLE_STACK_H_
