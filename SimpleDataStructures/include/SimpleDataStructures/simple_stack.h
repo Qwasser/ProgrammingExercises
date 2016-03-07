@@ -8,33 +8,33 @@
 
 template <class T> class SimpleStack {
 public:
-    T pop();
-    void push(T object);
-    T peek();
+    T Pop();
+    void Push(T object);
+    T Peek();
 
-    std::vector<T> toVector();
+    std::vector<T> ToVector();
 
-    bool isEmpty() {
-        return current_size == 0;
+    bool is_empty() {
+        return current_size_ == 0;
     }
 
     size_t size() {
-        return current_size;
+        return current_size_;
     }
 
 private:
-    ListNode<T> * top = nullptr;
-    size_t current_size = 0;
+    ListNode<T> * top_ = nullptr;
+    size_t current_size_ = 0;
 };
 
-template <class T> T SimpleStack<T>::pop() {
-    if (!top) {
+template <class T> T SimpleStack<T>::Pop() {
+    if (!top_) {
         throw std::out_of_range("Pop on empty stack");
     }
 
-    ListNode<T> * old_top = top;
-    top = top->next;
-    current_size--;
+    ListNode<T> * old_top = top_;
+    top_ = top_->next;
+    current_size_--;
 
     try {
         T item = old_top->data;
@@ -47,28 +47,28 @@ template <class T> T SimpleStack<T>::pop() {
     }
 }
 
-template <class T> void SimpleStack<T>::push(T item) {
+template <class T> void SimpleStack<T>::Push(T item) {
     ListNode<T> * new_node = new ListNode<T>;
-    new_node->next = top;
+    new_node->next = top_;
     new_node->data = item;
-    top = new_node;
-    current_size++;
+    top_ = new_node;
+    current_size_++;
 }
 
-template <class T> T SimpleStack<T>::peek() {
-    if(top) {
-        return top->data;
+template <class T> T SimpleStack<T>::Peek() {
+    if(top_) {
+        return top_->data;
     }
     else {
         throw std::out_of_range("Peek on empty stack");
     }
 }
 
-template <class T> std::vector<T> SimpleStack<T>::toVector() {
+template <class T> std::vector<T> SimpleStack<T>::ToVector() {
     std::vector<T> result;
-    result.reserve(current_size);
+    result.reserve(current_size_);
 
-    ListNode<T> * node = top;
+    ListNode<T> * node = top_;
     while(node) {
         result.push_back(node->data);
         node = node->next;

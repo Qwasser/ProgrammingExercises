@@ -11,7 +11,7 @@ public:
     HanoiTowers(size_t N) {
         problem_size = N;
         for (size_t i = N; i > 0; --i) {
-            stack_A.push(i);
+            stack_A.Push(i);
         }
     }
 
@@ -29,7 +29,7 @@ private:
     }
 
     void printStack(SimpleStack<size_t> & stack) {
-        std::vector<size_t> vec = stack.toVector();
+        std::vector<size_t> vec = stack.ToVector();
         for (auto itr = vec.rbegin(); itr != vec.rend(); ++itr) {
             std::cout << *itr << " ";
         }
@@ -47,7 +47,7 @@ private:
         assert(!from.isEmpty());
         assert(from.peek() < to.peek());
 
-        to.push(from.pop());
+        to.Push(from.Pop());
 
         if(print_states) {
             printState();
